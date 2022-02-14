@@ -23,9 +23,16 @@ def right():
 def off():
     explorerhat.motor.one.stop()
     explorerhat.motor.two.stop()
-    
 
-bd = BlueDot(cols=3, rows=3)
+def slider(pos):
+  global speed  
+  horizontal = ((pos.x + 1) / 2)
+  percentage = round(horizontal * 100, 2)
+  print("{}%".format(percentage))
+  speed = percentage * 100
+
+
+bd = BlueDot(cols=4, rows=3)
 bd.color = "gray"
 bd.square = True
 bd.border = True
@@ -43,5 +50,6 @@ bd[1,2].when_pressed = down
 bd[0,1].when_pressed = left
 bd[2,1].when_pressed = right
 bd[1,1].when_pressed = off
+bd[0,3].when_pressed = slider
 
 pause()
